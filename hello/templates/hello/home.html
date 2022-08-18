@@ -3,6 +3,8 @@
     Home
 {% endblock %}
 {% block content %}
+{% if user.is_authenticated %}
+    Hi {{ user.username }}!
     <h2>Logged messages</h2>
 
     {% if message_list %}
@@ -29,4 +31,8 @@
     {% else %}
         <p>No messages have been logged. Use the <a href="{% url 'log' %}">Log Message form</a>.</p>
     {% endif %}
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
 {% endblock %}

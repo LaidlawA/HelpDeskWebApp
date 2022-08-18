@@ -3,9 +3,14 @@
     Log a message
 {% endblock %}
 {% block content %}
+{% if user.is_authenticated %}
     <form method="POST" class="log-form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Log</button>
     </form>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
 {% endblock %}
