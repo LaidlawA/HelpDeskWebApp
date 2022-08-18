@@ -28,11 +28,7 @@ DEBUG = True
 # domain to ALLOWED_HOSTS; you get an error message if you forget. When you add
 # a specific host, you must also add 'localhost' and/or '127.0.0.1' for local
 # debugging (which are enabled by default when ALLOWED_HOSTS is empty.)
-ALLOWED_HOSTS = [
-    #'localhost',
-    #'127.0.0.1'
-    #'vscode-django-tutorial.azurewebsites.net'  # Sample name only!
-]
+ALLOWED_HOSTS = ['ec2-13-42-7-249.eu-west-2.compute.amazonaws.com']
 
 # Application definition
 
