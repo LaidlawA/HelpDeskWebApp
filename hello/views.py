@@ -30,3 +30,9 @@ def log_message(request):
 
 def login(request):
     return redirect("/accounts/login")
+
+def home(request):
+    return render(request, "hello/home.html")
+
+def passwordchange(request):
+    return redirect("/accounts/password_change")
