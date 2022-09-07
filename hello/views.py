@@ -17,14 +17,9 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
-class HomeListView(ListView):
-    """Renders the home page, with a list of all polls."""
-
-    model = LogMessage
-
-    def get_context_data(self, **kwargs):
-        context = super(HomeListView, self).get_context_data(**kwargs)
-        return context
+def all_tickets(request):
+	ticket_list = LogMessage.objects.all()
+	return render(request, 'hello/tickets.html', {'ticket_list':ticket_list})
 
 def log_message(request):
     form = LogMessageForm(request.POST or None)
@@ -33,7 +28,7 @@ def log_message(request):
             message = form.save(commit=False)
             message.log_date = datetime.now()
             message.save()
-            return redirect("home")
+            return redirect("tickets")
         else:
             return render(request, "hello/log_message.html", {"form": form})
     else:
@@ -44,6 +39,9 @@ def login(request):
 
 def home(request):
     return render(request, "hello/home.html")
+
+def tickets(request):
+    return render(request, "hello/tickets.html")
 
 def passwordchange(request):
     return redirect("/accounts/password_change")
@@ -72,7 +70,7 @@ def password_reset_request(request):
 					email_template_name = "password/password_reset_email.txt"
 					c = {
 					"email":user.email,
-					'domain':'127.0.0.1:8000',
+					'domain':'127.0.0.1:8000', #works locally only
 					'site_name': 'Website',
 					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
 					"user": user,

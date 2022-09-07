@@ -1,3 +1,7 @@
+.bold {
+    font-weight: bold;
+}
+
 .message {
     font-weight: 600;
     color: blue;
@@ -23,7 +27,7 @@
 
 .navbar-item {
     font-variant: small-caps;
-    margin-left: 30px;
+    margin-left: 0px;
 }
 
 .body-content {
