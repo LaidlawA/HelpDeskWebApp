@@ -1,4 +1,6 @@
+from tkinter import Widget
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from hello.models import LogMessage
@@ -6,7 +8,7 @@ from hello.models import LogMessage
 class LogMessageForm(forms.ModelForm):
     class Meta:
         model = LogMessage
-        fields = ("name","email","subject","appname","message","severity",)  # NOTE: the trailing comma is required
+        fields = ("assign","email","subject","appname","message","severity",)  # NOTE: the trailing comma is required
 
 class NewUserForm(UserCreationForm):
 	email = forms.EmailField(required=True)
