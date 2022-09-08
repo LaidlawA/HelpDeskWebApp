@@ -4,22 +4,36 @@
     <meta charset="utf-8"/>
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'hello/bootstrap.css' %}"/>
 </head>
 
 <body>
-<div class="navbar">
-    <a href="{% url 'home' %}" class="navbar-brand">Home</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'log' %}" class="navbar">Raise a ticket</a>
-    <a href="{% url 'tickets' %}" class="navbar-item">Open Tickets</a>
-    <a href="{% url 'password_change' %}" class ="navbar-item">Change Password</a>
-    <a href="{% url 'logout' %}" class ="navbar-item">Log Out</a>
-    {% else %}
-    {% endif %}
-</div>
-
+    <nav class="navbar navbar-expand-lg navbar-light"style="background-color: #457fa9;">
+        <a class="navbar-brand">Welcome to the Help Desk Application</a>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'log' %}">Raise Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'tickets' %}">Open Tickets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'password_change' %}">Reset Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">logout</a>
+            </li>
+            {% else %}
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
 <div class="body-content">
     {% block content %}
     {% endblock %}

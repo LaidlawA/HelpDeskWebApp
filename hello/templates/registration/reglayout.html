@@ -4,18 +4,30 @@
     <meta charset="utf-8"/>
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/bootstrap.css' %}"/>
 </head>
 
 <body>
-<div class="navbar">
-    <a> Welcome to the Help Desk Application</a>
-    <a href="/accounts/login/" class ="navbar-item">| Log in</a>
-    <a href="/register/" class ="navbar-item">| Register</a>
-    <a href="/password_reset" class ="navbar-item">| Reset password</a>
-    <a href="/admin" class ="navbar-item">| Admin Login</a>
-</div>
-
+    <nav class="navbar navbar-expand-lg navbar-light"style="background-color: #457fa9;">
+        <a class="navbar-brand">Welcome to the Help Desk Application</a>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="/accounts/login/">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register/">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/password_reset">Reset Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">Admin Login</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 <div class="body-content">
     {% block content %}
     {% endblock %}
