@@ -7,6 +7,8 @@ from django.contrib.auth import login
 from django.contrib import messages
 from hello.forms import LogMessageForm
 from hello.models import LogMessage
+from hello.models import Application
+from hello.forms import ApplicationForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
@@ -21,6 +23,10 @@ def all_tickets(request):
 	ticket_list = LogMessage.objects.all()
 	return render(request, 'hello/tickets.html', {'ticket_list':ticket_list})
 
+def all_apps(request):
+	app_list = Application.objects.all()
+	return render(request, 'hello/applications.html', {'app_list':app_list})
+
 def log_message(request):
     form = LogMessageForm(request.POST or None)
     if request.method == "POST":
@@ -34,6 +40,19 @@ def log_message(request):
     else:
         return render(request, "hello/log_message.html", {"form": form})
 
+def log_application(request):
+    form = ApplicationForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.log_date = datetime.now()
+            message.save()
+            return redirect("applications")
+        else:
+            return render(request, "hello/applications.html", {"form": form})
+    else:
+        return render(request, "hello/applications.html", {"form": form})
+
 def login(request):
     return redirect("/accounts/login")
 
@@ -42,6 +61,9 @@ def home(request):
 
 def tickets(request):
     return render(request, "hello/tickets.html")
+
+def applications(request):
+    return render(request, "hello/applications.html")
 
 def passwordchange(request):
     return redirect("/accounts/password_change")

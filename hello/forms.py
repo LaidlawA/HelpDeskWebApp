@@ -4,11 +4,17 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from hello.models import LogMessage
+from hello.models import Application
 
 class LogMessageForm(forms.ModelForm):
     class Meta:
         model = LogMessage
-        fields = ("assign","email","subject","appname","message","severity",)  # NOTE: the trailing comma is required
+        fields = ("assign","email","subject","applicationname","message","severity",)  # NOTE: the trailing comma is required
+
+class ApplicationForm(forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ("applicationname","contactemail","description",)  # NOTE: the trailing comma is required
 
 class NewUserForm(UserCreationForm):
 	email = forms.EmailField(required=True)

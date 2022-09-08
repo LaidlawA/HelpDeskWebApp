@@ -4,11 +4,12 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 class Application(models.Model):
-
-    appname = models.CharField(max_length=50)
+    applicationname = models.CharField(max_length=50, blank=False, null=True)
+    contactemail = models.EmailField(max_length=50, blank=False, null=True)
+    description = models.CharField(max_length=400, blank=False, null=True)
 
     def __str__(self):
-        return self.appname
+        return self.applicationname
 
 class LogMessage(models.Model):
     severityvalue = (
@@ -18,10 +19,10 @@ class LogMessage(models.Model):
         (4, '4'),
         (5, '5')
     )
-    assign = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    assign = models.ForeignKey(User, blank=False, null=True, on_delete=models.SET_NULL)
     email = models.EmailField(max_length=50, blank=False, null=True)
     subject = models.CharField(max_length=100, blank=False, null=True)
-    appname = models.ForeignKey(Application, blank=False, null=True, on_delete=models.CASCADE)
+    applicationname = models.ForeignKey(Application, blank=False, null=True, on_delete=models.CASCADE)
     message = models.CharField(max_length=400, blank=False, null=True)
     severity = models.IntegerField(choices=severityvalue, default=5)
     log_date = models.DateTimeField("date logged")
