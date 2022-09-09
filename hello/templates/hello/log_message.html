@@ -4,7 +4,8 @@
 {% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
-    <h6>Please enter your contact details along with a basic description of your issue and please input a priority on a scale of 1-5, 5 being least urgent</h6>
+    <h6>Pick and assigne from the list, if you are unsure please pick the admin user, then enter your contact email and further infromation</h6>
+    <h6>priority is on a scale of 1-5, 5 being least urgent</h6>
     <h6>We will assess the priority ourselves as well and reduce this if we deem an issue to be non-urgent</h6>
     <form method="POST" class="form-control">
         {% csrf_token %}

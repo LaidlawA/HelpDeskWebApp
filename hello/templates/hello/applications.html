@@ -3,31 +3,15 @@
     Add an application
 {% endblock %}
 {% block content %}
-{% if user.is_authenticated %}
+{% if user.is_superuser %}
     <h6>Please submit this form with new application details</h6>
     <form method="POST" class="form-control">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Add Application</button>
     </form>
-    <h3>Application List</h3>
-    {% for app in app_list %}
-    <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Severity: {{ app.spplicationname }}</h5>
-          <p class="card-text">
-            <ul>
-                <li>{{ app.description }}</li>
-                <li>{{ app.contactemail }}</li>
-            </ul>
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    <br/>
-    {% endfor %}
 {% else %}
-    <p>You are not logged in</p>
-    <a href="{% url 'login' %}">Log In</a>
+    <p>You do not have permissons to add a new application</p>
+    <p>Please contact and Admin if you require this access</p>
 {% endif %}
 {% endblock %}

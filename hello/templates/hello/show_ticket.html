@@ -1,0 +1,17 @@
+{% extends "hello/layout.html" %}
+{% block title %}
+    Application
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>{{ ticket.subject }}</h1>
+    <li>{{ ticket.assign }}</li>
+    <li>{{ ticket.email }}</li>
+    <li>{{ ticket.applicationname }}</li>
+    <li>{{ ticket.message }}</li>
+    <li>{{ ticket.log_date }}</li>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}

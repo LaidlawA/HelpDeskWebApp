@@ -21,7 +21,7 @@
                 <li>{{ ticket.log_date }}</li>
             </ul>
           </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a href="{% url 'showticket' ticket.id %}" class="btn btn-primary">View Details</a>
         </div>
       </div>
     <br/>

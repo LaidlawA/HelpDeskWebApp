@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light"style="background-color: #457fa9;">
-        <a class="navbar-brand">Welcome to the Help Desk Application</a>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1e6b2c;">
+        <a class="navbar-brand">Help Desk Application</a>
       
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -23,15 +23,24 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'tickets' %}">Open Tickets</a>
             </li>
+              {% if user.is_superuser %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'applications' %}">Add Applications</a>
+                </li>
+              {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'applications' %}">Applications</a>
-              </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'password_change' %}">Reset Password</a>
+              <a class="nav-link" href="{% url 'applicationlist' %}">Application List</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">logout</a>
+              <a class="nav-link" href="{% url 'password_change' %}">Reset Password</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">logout</a>
+            </li>
+            <form class="d-flex" method="POST" action="{% url 'search_tickets' %}"> {% csrf_token %}
+              <input class="form-control me-2 mr-sm-2" type="search" placeholder="Search App Tickets" aria-label="Search" name="searched">
+              <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #eef1f3;" type="submit">Search</button>
+            </form>
             {% else %}
             {% endif %}
           </ul>

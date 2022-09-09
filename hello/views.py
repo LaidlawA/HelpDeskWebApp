@@ -25,7 +25,24 @@ def all_tickets(request):
 
 def all_apps(request):
 	app_list = Application.objects.all()
-	return render(request, 'hello/applications.html', {'app_list':app_list})
+	return render(request, 'hello/applicationlist.html', {'app_list':app_list})
+
+def show_application(request, app_id):
+	app = Application.objects.get(pk=app_id)
+	return render(request, 'hello/show_application.html', {'app':app})
+
+def show_ticket(request, ticket_id):
+	ticket = LogMessage.objects.get(pk=ticket_id)
+	return render(request, 'hello/show_ticket.html', {'ticket':ticket})
+
+def search_tickets(request):
+	if request.method == "POST":
+		searched = request.POST.get('searched')
+		tickets = LogMessage.objects.filter(applicationname__applicationname__icontains=searched)
+
+		return render(request, 'hello/search_tickets.html', {'searched':searched, 'tickets':tickets})
+	else:
+		return render(request, 'hello/search_tickets.html', {})
 
 def log_message(request):
     form = LogMessageForm(request.POST or None)
@@ -51,7 +68,7 @@ def log_application(request):
         else:
             return render(request, "hello/applications.html", {"form": form})
     else:
-        return render(request, "hello/applications.html", {"form": form})
+        return render(request, "hello/applications.html", {"form": form},)
 
 def login(request):
     return redirect("/accounts/login")

@@ -1,0 +1,21 @@
+{% extends "hello/layout.html" %}
+{% block title %}
+    Search
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    {% if searched %}
+        <h6>You searched for {{ searched }} </h6>
+        <br/>
+        {% for ticket in tickets %}
+            <a href="{% url 'showticket' ticket.id %}">{{ ticket.applicationname }} - {{ ticket.subject }}</a>
+        <br/>
+        {% endfor %}
+    {% else %}
+        <h6>Hey! you didnt search for anything!!</h6>
+    {% endif %}
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
