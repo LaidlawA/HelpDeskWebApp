@@ -28,6 +28,16 @@ def all_apps(request):
 	app_list = Application.objects.all()
 	return render(request, 'hello/applicationlist.html', {'app_list':app_list})
 
+def delete_ticket(request, ticket_id):
+	delete_ticket = LogMessage.objects.get(pk=ticket_id)
+	delete_ticket.delete()
+	return redirect('tickets')
+
+def delete_application(request, app_id):
+	delete_application = Application.objects.get(pk=app_id)
+	delete_application.delete()
+	return redirect('applicationlist')
+
 def show_application(request, app_id):
 	app = Application.objects.get(pk=app_id)
 	return render(request, 'hello/show_application.html', {'app':app})

@@ -23,4 +23,6 @@ urlpatterns = [
     path("search_tickets/", views.search_tickets, name="search_tickets"),
     path("update_ticket/<ticket_id>", views.update_ticket, name="update_ticket"),
     path("update_application/<app_id>", views.update_application, name="update_application"),
+    path("delete_ticket/<ticket_id>", views.delete_ticket, name="delete_ticket"),
+    path("delete_application/<app_id>", views.delete_application, name="delete_application"),
 ]
