@@ -1,3 +1,4 @@
+from multiprocessing import reduction
 from django.shortcuts import redirect, render
 from django.utils.timezone import datetime
 from django.views.generic import ListView
@@ -34,6 +35,24 @@ def show_application(request, app_id):
 def show_ticket(request, ticket_id):
 	ticket = LogMessage.objects.get(pk=ticket_id)
 	return render(request, 'hello/show_ticket.html', {'ticket':ticket})
+
+def update_ticket(request, ticket_id):
+	update_ticket = LogMessage.objects.get(pk=ticket_id)
+	form = LogMessageForm(request.POST or None, instance=update_ticket)
+	if form.is_valid():
+		form.save()
+		return redirect('tickets')
+
+	return render(request, 'hello/update_ticket.html', {'update_ticket':update_ticket, 'form':form})
+
+def update_application(request, app_id):
+	update_application = Application.objects.get(pk=app_id)
+	form = ApplicationForm(request.POST or None, instance=update_application)
+	if form.is_valid():
+		form.save()
+		return redirect('applicationlist')
+
+	return render(request, 'hello/update_application.html', {'update_application':update_application, 'form':form})
 
 def search_tickets(request):
 	if request.method == "POST":

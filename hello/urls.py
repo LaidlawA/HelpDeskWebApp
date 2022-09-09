@@ -21,4 +21,6 @@ urlpatterns = [
     path("show_application/<app_id>", views.show_application, name="showapplication"),
     path("show_ticket/<ticket_id>", views.show_ticket, name="showticket"),
     path("search_tickets/", views.search_tickets, name="search_tickets"),
+    path("update_ticket/<ticket_id>", views.update_ticket, name="update_ticket"),
+    path("update_application/<app_id>", views.update_application, name="update_application"),
 ]

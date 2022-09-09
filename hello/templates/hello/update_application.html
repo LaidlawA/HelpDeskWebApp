@@ -1,0 +1,17 @@
+{% extends "hello/layout.html" %}
+{% block title %}
+    app update
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br/>
+        <input type="submit" value="Update" class="btn btn-secondary">
+    </form>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
