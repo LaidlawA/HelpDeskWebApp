@@ -21,11 +21,11 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
 def all_tickets(request):
-	ticket_list = LogMessage.objects.all()
+	ticket_list = LogMessage.objects.all().order_by('severity')
 	return render(request, 'hello/tickets.html', {'ticket_list':ticket_list})
 
 def all_apps(request):
-	app_list = Application.objects.all()
+	app_list = Application.objects.all().order_by('applicationname')
 	return render(request, 'hello/applicationlist.html', {'app_list':app_list})
 
 def delete_ticket(request, ticket_id):
@@ -93,7 +93,7 @@ def log_application(request):
             message = form.save(commit=False)
             message.log_date = datetime.now()
             message.save()
-            return redirect("applications")
+            return redirect("applicationlist")
         else:
             return render(request, "hello/applications.html", {"form": form})
     else:
