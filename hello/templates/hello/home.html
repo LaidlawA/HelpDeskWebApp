@@ -5,9 +5,10 @@
 {% block content %}
 {% if user.is_authenticated %}
     Hi {{ user.username }}!
-    <p class="bold">Welcome to the Ticketing Application</p>
-    <p>Please ensure all tickets raised are well-defined and contains meaningful information so that our technicians' can action your request as soon as possible.</p>
-    <p>All tickets are visible in date order but will be prioritized in severity order by our team.</p>
+    <br/>
+    <p class="bold">Welcome to the Help Desk Application</p>
+    <p>Please ensure all tickets that are raised are well-defined and contain meaningful information so that our technicians' can action your request as soon as possible.</p>
+    <p>All tickets are visible in severity order as they are prioritised in that way</p>
     <a href="{% url 'log' %}">Click here to raise a ticket</a>
 {% else %}
     <p>You are not logged in</p>
