@@ -23,7 +23,9 @@
           </p>
           <a href="{% url 'showticket' ticket.id %}" class="btn btn-primary">View Details</a>
           <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-primary">Update Ticket</a>
+          {% if user.is_superuser %}
           <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-outline-danger">Delete Ticket</a>
+          {% endif %}
         </div>
       </div>
     <br/>

@@ -19,7 +19,9 @@
           </p>
           <a href="{% url 'showapplication' app.id %}" class="btn btn-primary">View Details</a>
           <a href="{% url 'update_application' app.id %}" class="btn btn-primary">Update Application</a>
+          {% if user.is_superuser %}
           <a href="{% url 'delete_application' app.id %}" class="btn btn-outline-danger">Delete Application</a>
+          {% endif %}
         </div>
       </div>
     <br/>

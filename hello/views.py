@@ -2,9 +2,9 @@ from multiprocessing import reduction
 from django.shortcuts import redirect, render
 from django.utils.timezone import datetime
 from django.views.generic import ListView
-from django.contrib.auth import login as auth_login
-from .forms import NewUserForm
 from django.contrib.auth import login
+from .forms import NewUserForm
+from django.contrib.auth import authenticate
 from django.contrib import messages
 from hello.forms import LogMessageForm
 from hello.models import LogMessage
@@ -99,7 +99,7 @@ def log_application(request):
     else:
         return render(request, "hello/applications.html", {"form": form},)
 
-def login(request):
+def login_page(request):
     return redirect("/accounts/login")
 
 def home(request):
@@ -114,16 +114,20 @@ def applications(request):
 def passwordchange(request):
     return redirect("/accounts/password_change")
 
-def register_request(request):
+def register_user(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		if form.is_valid():
-			user = form.save()
-			auth_login(request, user)
-			messages.success(request, "Registration successful." )
+			form.save()
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password1']
+			user = authenticate(username=username, password=password)
+			login(request, user)
+			messages.success(request, ("Registration Successful!"))
 			return redirect("home")
-		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = NewUserForm()
+	else:
+		form = NewUserForm()
+
 	return render (request=request, template_name="registration/register.html", context={"register_form":form})
 
 def password_reset_request(request):
