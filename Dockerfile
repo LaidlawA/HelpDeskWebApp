@@ -2,7 +2,7 @@
 FROM python:3.9
 
 # File Author / Maintainer
-MAINTAINER Esther
+MAINTAINER Alex Laidlaw
 
 #add project files to the usr/src/app folder
 ADD . /usr/src/app
