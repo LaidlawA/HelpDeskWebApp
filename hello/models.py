@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+#Model for the applcaion form allowing for a name, email and desciption
 class Application(models.Model):
     applicationname = models.CharField(max_length=50, blank=False, null=True)
     contactemail = models.EmailField(max_length=50, blank=False, null=True)
@@ -11,6 +12,7 @@ class Application(models.Model):
     def __str__(self):
         return self.applicationname
 
+#Model for the ticket form allowing for a assingee, email, subject, name, message, severity and date (which is automatic)
 class LogMessage(models.Model):
     severityvalue = (
         (1, '1'),

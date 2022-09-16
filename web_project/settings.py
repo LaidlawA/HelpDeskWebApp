@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
+#Added hello and crispy forms as they have been added to this application
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

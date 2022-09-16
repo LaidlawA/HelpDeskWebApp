@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 
 from hello import views
 
+#URLs for whole applicaiton, this could have been split for user registraion and log and and appllications tasks
 urlpatterns = [
     path("", views.login_page, name="login"),
     path("home/", views.home, name="home"),

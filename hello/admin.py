@@ -5,6 +5,7 @@ from . import models
 #admin.site.register(models.LogMessage)
 #admin.site.register(models.Application)
 
+# This allowd for a filters and ordering within the django console
 @admin.register(models.LogMessage)
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('subject', 'applicationname')
